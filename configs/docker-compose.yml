@@ -2,21 +2,21 @@ version: '3'
 
 services:
   frontend:
-    image: giftcup/strapi-frontend
-    container_name: nextjs-strapi-boilerplate-frontend
+    container_name: language-crowdsource-frontend
+    build:
+      context: ../frontend
     depends_on:
       - backend
     ports:
-      - "80:3000"
+      - "8001:3000"
     restart: unless-stopped
     volumes:
       - ./app:/frontend
   
   backend:
-    image: strapi/strapi
-    container_name: nextjs-strapi-boilerplate-backend
+    container_name: language-crowdsource-backend
     build:
-      context: .
+      context: ../backend
     depends_on:
       - db
     environment:
@@ -33,7 +33,7 @@ services:
       - ./app:/srv/app
 
   db:
-    container_name: nextjs-strapi-boilerplate-db
+    container_name: language-crowdsource-db
     image: postgres
     ports:
       - "8009:5432"

@@ -1,5 +1,7 @@
 FROM strapi/base
 
+WORKDIR /usr/src/backend
+
 COPY ./app/package.json ./
 COPY ./app/yarn.lock ./
 
