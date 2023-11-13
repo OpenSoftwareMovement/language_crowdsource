@@ -9,4 +9,5 @@ out
 **/.cache
 **/data
 backend/build
+configs/data
 configs/app
