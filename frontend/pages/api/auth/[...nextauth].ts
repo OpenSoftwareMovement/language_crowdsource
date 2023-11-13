@@ -13,7 +13,7 @@ const options = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
-  secret:"h/bnR6FvcluRRMbry5U5p3p9EEQ4VwaZOxVYZY2s12E=", //PUT YOUR OWN SECRET (command: openssl rand -base64 32)
+  secret: "h/bnR6FvcluRRMbry5U5p3p9EEQ4VwaZOxVYZY2s12E=", //PUT YOUR OWN SECRET (command: openssl rand -base64 32)
   database: process.env.NEXT_PUBLIC_DATABASE_URL,
   session: {
     strategy: "jwt",
@@ -30,14 +30,18 @@ const options = {
       const isSignIn = user ? true : false;
 
       if (isSignIn) {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/auth/${account.provider}/callback?access_token=${account?.access_token}`
-        );
+        const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/auth/${account.provider}/callback?access_token=${account?.access_token}`;
+        console.log("API URL:", apiUrl);
 
-        const data = await response.json();
+        try {
+          const response = await fetch(apiUrl);
+          const data = await response.json();
 
-        token.jwt = data.jwt;
-        token.id = data.user.id;
+          token.jwt = data.jwt;
+          token.id = data.user.id;
+        } catch (error) {
+          console.error("Fetch error:", error);
+        }
       }
 
       return token;
