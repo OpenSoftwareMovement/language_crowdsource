@@ -13,7 +13,7 @@ const options = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
-  secret: "h/bnR6FvcluRRMbry5U5p3p9EEQ4VwaZOxVYZY2s12E=", //PUT YOUR OWN SECRET (command: openssl rand -base64 32)
+  secret: process.env.JWT_SECRET, //PUT YOUR OWN SECRET (command: openssl rand -base64 32)
   database: process.env.NEXT_PUBLIC_DATABASE_URL,
   session: {
     strategy: "jwt",
@@ -31,7 +31,6 @@ const options = {
 
       if (isSignIn) {
         const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/auth/${account.provider}/callback?access_token=${account?.access_token}`;
-        console.log("API URL:", apiUrl);
 
         try {
           const response = await fetch(apiUrl);
