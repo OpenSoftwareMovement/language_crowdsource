@@ -7,5 +7,7 @@ out
 **/*.pem
 .vercel
 **/.cache
-backend/data
+**/data
 backend/build
+configs/data
+configs/app
