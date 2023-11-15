@@ -11,3 +11,4 @@ out
 backend/build
 configs/data
 configs/app
+**/service-account.json
