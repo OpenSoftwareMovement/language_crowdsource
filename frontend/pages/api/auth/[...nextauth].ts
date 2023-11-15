@@ -6,6 +6,16 @@ import iToken from "types/token";
 import IUser from "types/user";
 import ISession from "types/session";
 
+const serviceAccount = require("../../../service-account.json")
+
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: process.env.FIRESTORE_DATABASE_URL,
+  });
+}
+
+
 const options = {
   providers: [
     GoogleProvider({
