@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import admin from 'firebase-admin'
 import IAccount from "types/account";
 import iToken from "types/token";
 import IUser from "types/user";
@@ -48,6 +49,13 @@ const options = {
 
           token.jwt = data.jwt;
           token.id = data.user.id;
+          
+          const firebaseUid = data.user.id
+          try {
+            await admin.firestore().collection("users").doc(firebaseUid).set(user);
+          } catch (error) {
+            console.error('Error creating Firestore document:', error);
+          }
         } catch (error) {
           console.error("Fetch error:", error);
         }
