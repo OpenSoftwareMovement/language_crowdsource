@@ -52,7 +52,7 @@ const options = {
           
           const firebaseUid = data.user.id
           try {
-            await admin.firestore().collection("users").doc(firebaseUid).set(user);
+            await admin.firestore().collection("users").doc(firebaseUid).set({...user, provider: account?.provider});
           } catch (error) {
             console.error('Error creating Firestore document:', error);
           }
