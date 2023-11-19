@@ -1,16 +1,6 @@
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/6391763/90599044-ca070300-e211-11ea-8b8a-89354dd30bd5.png" alt="Logo"/>
-</p>
-
-<p align="center">
-  <a href="https://twitter.com/nirmalyaghosh23">
-    <img alt="Twitter: Nirmalya Ghosh" src="https://img.shields.io/twitter/follow/NirmalyaGhosh_.svg?style=social" target="_blank" />
-  </a>
-</p>
-
 This is a boilerplate for building applications using Strapi and Next.js. This boilerplate consists of the following:
 
-1. [**frontend**](https://github.com/ghoshnirmalya/nextjs-strapi-boilerplate/tree/master/frontend): Next.js application
+1. [**frontend**](https://github.com/ghoshnirmalya/nextjs-strapi-boilerplate/tree/master/frontend): Dockerized Next.js application
 2. [**backend**](https://github.com/ghoshnirmalya/nextjs-strapi-boilerplate/tree/master/backend): Dockerized Strapi application
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
