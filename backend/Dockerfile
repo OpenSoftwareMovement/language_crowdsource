@@ -1,13 +1,14 @@
 FROM strapi/base
 
-WORKDIR /usr/src/backend
+WORKDIR /app
 
-COPY ./app/package.json ./
-COPY ./app/yarn.lock ./
+COPY package.json .
+COPY yarn.lock .
 
+RUN yarn cache clean
 RUN yarn install
 
-COPY ./app .
+COPY . .
 
 ENV NODE_ENV production
 

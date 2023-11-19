@@ -1,6 +1,31 @@
 version: '3'
 
 services:
+  db:
+    container_name: language-crowdsource-db
+    image: postgres
+    ports:
+      - "${DATABASE_PORT}:${DATABASE_PORT}"
+    env_file:
+      - ../configs/.env
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  backend:
+    container_name: language-crowdsource-backend
+    build:
+      context: ../backend
+    depends_on:
+      - db
+    env_file:
+      - ../backend/.env
+    ports:
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
+    volumes:
+      - ./app:/backend
+    restart: on-failure
+
   frontend:
     container_name: language-crowdsource-frontend
     build:
@@ -10,32 +35,7 @@ services:
     env_file:
       - ../frontend/.env
     ports:
-      - "${FRONTEND_PORT}:3000"
-    restart: unless-stopped
+      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
     volumes:
       - ./app:/frontend
-  
-  backend:
-    container_name: language-crowdsource-backend
-    build:
-      context: ../backend
-    depends_on:
-      - db
-    env_file:
-      - ../backend/app/.env
-    ports:
-      - "${BACKEND_PORT}:1337"
-    restart: on-failure
-    volumes:
-      - ./app:/srv/app
-
-  db:
-    container_name: language-crowdsource-db
-    image: postgres
-    ports:
-      - "${DATABASE_PORT}:5432"
-    env_file:
-      - ../backend/app/.env
-    volumes:
-      - ./data:/var/lib/postgresql/data
     restart: unless-stopped

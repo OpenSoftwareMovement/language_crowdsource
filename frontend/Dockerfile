@@ -1,11 +1,12 @@
-FROM node:12-alpine
+FROM node:18
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
-COPY ./package.json ./package.json
-COPY ./yarn.lock ./yarn.lock
+COPY package.json .
+# COPY ./yarn.lock ./yarn.lock
 
-RUN yarn install --ignore-engines
+RUN yarn cache clean
+RUN yarn install
 
 COPY . .
 

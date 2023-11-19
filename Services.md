@@ -32,7 +32,7 @@ The backend service builds an image from the `../backend` directory.
 The backend service depends on the `db` service.
 
 ### Environment Variables
-The backend service uses environment variables from the `../backend/app/.env` file.
+The backend service uses environment variables from the `../backend/.env` file.
 
 ### Ports
 The backend service exposes port `${BACKEND_PORT}`.
@@ -54,7 +54,7 @@ The db service uses the `postgres` image.
 The db service exposes port `${DATABASE_PORT}`.
 
 ### Environment Variables
-The db service uses environment variables from the `../backend/app/.env` file.
+The db service uses environment variables from the `../backend/.env` file.
 
 ### Restart Policy
 The db service restarts unless stopped.
