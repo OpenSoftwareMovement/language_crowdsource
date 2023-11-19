@@ -1,13 +1,13 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import admin from 'firebase-admin'
+import admin from "firebase-admin";
 import IAccount from "types/account";
 import iToken from "types/token";
 import IUser from "types/user";
 import ISession from "types/session";
 
-const serviceAccount = require("../../../service-account.json")
+const serviceAccount = require("../../../service-account.json");
 
 if (!admin.apps.length) {
   admin.initializeApp({
@@ -15,7 +15,6 @@ if (!admin.apps.length) {
     databaseURL: process.env.FIRESTORE_DATABASE_URL,
   });
 }
-
 
 const options = {
   providers: [
@@ -49,12 +48,16 @@ const options = {
 
           token.jwt = data.jwt;
           token.id = data.user.id;
-          
-          const firebaseUid = data.user.id
+
+          const firebaseUid = data.user.id;
           try {
-            await admin.firestore().collection("users").doc(firebaseUid).set(user);
+            await admin
+              .firestore()
+              .collection("users")
+              .doc(firebaseUid)
+              .set({ ...user, provider: account?.provider });
           } catch (error) {
-            console.error('Error creating Firestore document:', error);
+            console.error("Error creating Firestore document:", error);
           }
         } catch (error) {
           console.error("Fetch error:", error);
